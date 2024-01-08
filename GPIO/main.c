@@ -19,6 +19,9 @@ void PORT0_IRQHandler(void) {
     Uart1_TxString("Key pressed\r\n");
 
     delay1ms(10);
+  } else {
+    Uart1_TxString("Key released\r\n");
+    delay1ms(10);
   }
 }
 int main(void) {
@@ -50,7 +53,7 @@ int main(void) {
   EnableNvic(PORT0_IRQn, DDL_IRQ_LEVEL_DEFAULT, TRUE);
 
   while (1) {
-     if (GPIO_GetPinIn(0, 2) == TRUE) {
+    if (GPIO_GetPinIn(0, 2) == TRUE) {
       Uart1_TxString("1\r\n");
     } else {
       Uart1_TxString("0\r\n");
