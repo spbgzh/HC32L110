@@ -11,7 +11,7 @@ void AdcContIrqCallback(void)
     // Interrupt clear will be handled by Adc_IRQHandler();
     for (i = 0; i < 8; i++)
     {
-        u16ScanResult[i] = ADC_GetScanResult(i);
+        u16ScanResult[i] = ADC_GetScanResult(1);
     }
 }
 
@@ -40,15 +40,8 @@ int main(void)
     // Enable printf
     Bsp_PrinfInit(115200);
 
-    Gpio_SetAnalog(2, 4, TRUE); // AIN0
+
     Gpio_SetAnalog(2, 6, TRUE); // AIN1
-    Gpio_SetAnalog(3, 2, TRUE); // AIN2
-    Gpio_SetAnalog(3, 3, TRUE); // AIN3 +
-    Gpio_SetAnalog(3, 4, TRUE); // AIN4
-    // P35:AIN5, 
-    Gpio_SetAnalog(3, 6, TRUE); // AIN6
-    // P01:AIN7
-    // P02:AIN8
 
     ADC_Enable();
     // Enable Reference Voltage for ADC
@@ -89,8 +82,7 @@ int main(void)
     Adc_EnableIrq();
     Adc_CmpCfg(&stcAdcIrq);
 
-    stcAdcScanCfg.u8AdcScanModeCh = ADC_SCAN_CH0_EN  | ADC_SCAN_CH1_EN | ADC_SCAN_CH2_EN
-                                    | ADC_SCAN_CH3_EN | ADC_SCAN_CH4_EN | ADC_SCAN_CH6_EN;
+    stcAdcScanCfg.u8AdcScanModeCh = ADC_SCAN_CH1_EN;
 
     stcAdcScanCfg.u8AdcSampCnt = 0x5;
     Adc_ConfigScanMode(&stcAdcCfg, &stcAdcScanCfg);
