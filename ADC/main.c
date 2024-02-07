@@ -11,7 +11,7 @@ void AdcContIrqCallback(void)
     // Interrupt clear will be handled by Adc_IRQHandler();
     for (i = 0; i < 8; i++)
     {
-        u16ScanResult[i] = ADC_GetScanResult(1);
+        u16ScanResult[i] = ADC_GetScanResult(0);
     }
 }
 
@@ -41,7 +41,7 @@ int main(void)
     Bsp_PrinfInit(115200);
 
 
-    Gpio_SetAnalog(2, 6, TRUE); // AIN1
+    Gpio_SetAnalog(2, 4, TRUE); // AIN0
 
     ADC_Enable();
     // Enable Reference Voltage for ADC
